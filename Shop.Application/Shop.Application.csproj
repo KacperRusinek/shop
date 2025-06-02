@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\shop.Domain\shop.Domain.csproj" />
+    <ProjectReference Include="..\shop.SharedKernel\shop.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Handlers\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\shop.API\shop.API.csproj" />
+    <ProjectReference Include="..\Shop.Application\Shop.Application.csproj" />
+    <ProjectReference Include="..\shop.client\shop.client.esproj" />
+    <ProjectReference Include="..\shop.Domain\shop.Domain.csproj" />
+    <ProjectReference Include="..\shop.Infrastructure\shop.Infrastructure.csproj" />
+    <ProjectReference Include="..\shop.Persistence\shop.Persistence.csproj" />
+    <ProjectReference Include="..\shop.SharedKernel\shop.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>
