@@ -7,10 +7,10 @@ type Props = {
     onSave: (product: Product | Omit<Product, 'id'>) => void;
     onCancel: () => void;
     initialProduct?: Product;
-    categories: category[]; // 👈 TO JEST KLUCZOWE!
+    categories: category[]; 
 };
 
-export function ProductForm({ initialProduct, onSave, onCancel }: Props) {
+export function ProductForm({ initialProduct, onSave, onCancel, categories }: Props) { 
     const [name, setName] = useState(initialProduct?.name || '');
     const [description, setDescription] = useState(initialProduct?.description || '');
     const [price, setPrice] = useState(initialProduct?.price.toString() || '');
@@ -58,8 +58,19 @@ export function ProductForm({ initialProduct, onSave, onCancel }: Props) {
                 <input type="number" value={price} onChange={e => setPrice(e.target.value)} required step="0.01" />
             </label>
             <label>
-                Category ID:
-                <input type="number" value={categoryId} onChange={e => setCategoryId(e.target.value)} required />
+                Category:
+                <select
+                    value={categoryId}
+                    onChange={e => setCategoryId(e.target.value)}
+                    required
+                >
+                    <option value="">Select category</option>
+                    {categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>
+                            {cat.name}
+                        </option>
+                    ))}
+                </select>
             </label>
             <label>
                 Image URL:

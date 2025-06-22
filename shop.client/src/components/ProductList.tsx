@@ -1,7 +1,13 @@
-import { useCategories } from '../hooks/useCategories';
 import * as React from 'react';
+import type { Product } from '../types/product';
+import type { category } from '../types/category';
+import { useCategories } from '../hooks/useCategories';
 
-
+type Props = {
+    products: Product[];
+    onEdit: (product: Product) => void;
+    onDelete: (id: number) => void;
+};
 
 export function ProductList({ products, onEdit, onDelete }: Props) {
     const { categories } = useCategories();
