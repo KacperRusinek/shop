@@ -7,6 +7,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
@@ -18,10 +20,6 @@
 		<ProjectReference Include="..\shop.Domain\shop.Domain.csproj" />
 		<ProjectReference Include="..\shop.Infrastructure\shop.Infrastructure.csproj" />
 		<ProjectReference Include="..\shop.Persistence\shop.Persistence.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Controllers\" />
 	</ItemGroup>
 
 </Project>

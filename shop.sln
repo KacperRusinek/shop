@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shop", "shop\shop.csproj", "{A4E18237-9E1A-4FD1-8BB1-457EC3E908FF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Application", "Shop.Application\Shop.Application.csproj", "{2B936B1E-05F7-4D6D-B467-690F8BD95F1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shop.API", "shop.API\shop.API.csproj", "{710995AA-7BB9-48C1-A0F5-D454E601373E}"
@@ -27,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A4E18237-9E1A-4FD1-8BB1-457EC3E908FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4E18237-9E1A-4FD1-8BB1-457EC3E908FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4E18237-9E1A-4FD1-8BB1-457EC3E908FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4E18237-9E1A-4FD1-8BB1-457EC3E908FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2B936B1E-05F7-4D6D-B467-690F8BD95F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2B936B1E-05F7-4D6D-B467-690F8BD95F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B936B1E-05F7-4D6D-B467-690F8BD95F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU

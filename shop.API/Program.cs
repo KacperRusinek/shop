@@ -1,27 +1,30 @@
 using Microsoft.EntityFrameworkCore;
-using shop.Domain.Entities;
 using Microsoft.OpenApi.Models;
+using shop.Domain.Entities;
+using shop.Persistence; // poprawnie
+using Shop.Application.Interfaces; // poprawnie
+using Shop.Application.Services;  // poprawnie
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Rejestracja us³ug
+builder.Services.AddScoped<IProductService, ProductService>();
 
-// Dodanie EF Core z PostgreSQL
+// Rejestracja DbContext z PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
+// Kontrolery i Swagger
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop API", Version = "v1" });
 });
 
+var app = builder.Build();
 
+// Middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -31,11 +34,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
