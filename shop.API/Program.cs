@@ -2,12 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using shop.Domain.Entities;
 using shop.Persistence; // poprawnie
+using shop.Services;
 using Shop.Application.Interfaces; // poprawnie
 using Shop.Application.Services;  // poprawnie
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Rejestracja us³ug
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 // Rejestracja DbContext z PostgreSQL

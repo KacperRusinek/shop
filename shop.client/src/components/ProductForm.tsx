@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import React from 'react';
+﻿import { useState } from 'react';
+import * as React from 'react';
 import type { Product } from '../types/product';
+import type { category } from '../types/category';
 
 type Props = {
-    initialProduct?: Product;
-    onSave: (product: Product | Omit<Product, "id">) => Promise<void>;
+    onSave: (product: Product | Omit<Product, 'id'>) => void;
     onCancel: () => void;
+    initialProduct?: Product;
+    categories: category[]; // 👈 TO JEST KLUCZOWE!
 };
 
 export function ProductForm({ initialProduct, onSave, onCancel }: Props) {

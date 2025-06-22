@@ -1,13 +1,10 @@
-import type { Product } from '../types/product';
+import { useCategories } from '../hooks/useCategories';
+import * as React from 'react';
 
-type Props = {
-    products: Product[];
-    onEdit: (product: Product) => void;
-    onDelete: (id: number) => void;
-};
+
 
 export function ProductList({ products, onEdit, onDelete }: Props) {
-    if (products.length === 0) return <p>No products found.</p>;
+    const { categories } = useCategories();
 
     return (
         <table className="product-table">
@@ -26,7 +23,7 @@ export function ProductList({ products, onEdit, onDelete }: Props) {
                         <td>{p.name}</td>
                         <td>{p.description}</td>
                         <td>{p.price.toFixed(2)}</td>
-                        <td>{p.categoryId || '-'}</td>
+                        <td>{categories.find(c => c.id === p.categoryId)?.name || '-'}</td>
                         <td>
                             <button onClick={() => onEdit(p)}>Edit</button>{' '}
                             <button onClick={() => onDelete(p.id)}>Delete</button>
