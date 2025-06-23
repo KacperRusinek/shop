@@ -10,10 +10,14 @@ export function Home() {
         // tutaj mo¿esz otworzyæ formularz edycji
     };
 
-    const handleDelete = (productId: number) => {
+    // w Home.tsx
+    const handleDelete = async (productId: number): Promise<void> => {
         alert(`Delete product ${productId}`);
-        // tutaj wywo³aj usuniêcie produktu
+        // np. await deleteProduct(productId);
     };
+
+
+
 
     if (loading) return <p>Loading products...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -24,8 +28,10 @@ export function Home() {
             <ProductList
                 products={products}
                 onEdit={handleEdit}
-                onDelete={handleDelete}
-            />
+                onDelete={handleDelete} onSelectProduct={function(id: number): void {
+                    throw new Error('Function not implemented.');
+                } }            />
+
         </div>
     );
 }

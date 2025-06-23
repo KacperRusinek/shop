@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Rejestracja us³ug
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+
 
 // Rejestracja DbContext z PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>

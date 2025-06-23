@@ -1,42 +1,201 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Global reset + layout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #212529;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-container {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Headings */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #495057;
 }
 
-.card {
-  padding: 2em;
+/* Error box */
+.error {
+    background-color: #ffe2e2;
+    border: 1px solid #ff6b6b;
+    color: #c92a2a;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
 }
 
-.read-the-docs {
-  color: #888;
+/* Buttons */
+button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin: 0.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
+
+    button:hover {
+        background-color: #0b5ed7;
+    }
+
+    button[type="button"] {
+        background-color: #6c757d;
+    }
+
+        button[type="button"]:hover {
+            background-color: #5a6268;
+        }
+
+/* Product table */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+    .product-table th,
+    .product-table td {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+        text-align: left;
+    }
+
+    .product-table th {
+        background-color: #e9ecef;
+    }
+
+    .product-table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+    form label {
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    form input,
+    form select {
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        font-size: 1rem;
+        margin-top: 0.25rem;
+    }
+
+        form input:focus,
+        form select:focus {
+            outline: none;
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+
+/* Form button container */
+.buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+/* === Reviews Section === */
+.reviews-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    background-color: #f1f3f5;
+}
+
+    .reviews-section h2 {
+        font-size: 1.75rem;
+        color: #343a40;
+        margin-bottom: 1rem;
+    }
+
+/* Review list */
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.review-card {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid #0d6efd;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.review-comment {
+    font-size: 1rem;
+    color: #212529;
+    margin-top: 0.25rem;
+}
+
+/* Review form */
+.review-form {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+    .review-form form label {
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .review-form form textarea {
+        resize: vertical;
+        min-height: 80px;
+        padding: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        font-size: 1rem;
+        margin-top: 0.25rem;
+    }
+
+        .review-form form textarea:focus {
+            outline: none;
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+

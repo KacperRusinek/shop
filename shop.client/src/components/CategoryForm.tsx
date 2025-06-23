@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useCategories } from '../hooks/useCategories';
+import './components.css';
+
 
 type Props = {
     onAddCategory: (name: string) => Promise<void>;
@@ -26,17 +28,17 @@ export function CategoryForm({ onAddCategory }: Props) {
     };
 
     return (
-        <form onSubmit= { handleSubmit } >
-        <input
-        value={ name }
-    onChange = {(e) => setName(e.target.value)
-}
-placeholder = "New category name"
-required
-    />
-    <button type="submit" disabled = { loading } >
-        { loading? 'Adding...': 'Add' }
-        </button>
+        <form className="category-form" onSubmit={handleSubmit}>
+            <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="New category name"
+                required
+            />
+            <button type="submit" disabled={loading}>
+                {loading ? 'Adding...' : 'Add'}
+            </button>
         </form>
+
   );
 }

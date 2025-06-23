@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Product } from './types/product';
 import type { category } from './types/category';
-import * as React from 'react';
+import type { Review, ReviewCreateDto } from './types/review';
+import './App.css';  
+
+
 
 
 import {
@@ -13,9 +16,15 @@ import {
 
 import { createCategory, fetchCategories } from './services/categoryService';
 
+import { fetchReviews, addReview } from './services/reviewService';
+
 import { ProductForm } from './components/ProductForm';
 import { ProductList } from './components/ProductList';
 import { CategoryForm } from './components/CategoryForm';
+import { ReviewForm } from './components/ReviewForm';
+import { ReviewList } from './components/ReviewList';
+
+type ProductWithoutId = Omit<Product, 'id'>;
 
 function App() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -24,7 +33,11 @@ function App() {
     const [isAdding, setIsAdding] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Load products & categories
+    // Recenzje
+    const [reviews, setReviews] = useState<Review[]>([]);
+    const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+    const [currentCustomerId] = useState<number>(1); 
+
     useEffect(() => {
         fetchProducts()
             .then(setProducts)
@@ -35,7 +48,17 @@ function App() {
             .catch((e) => setError(e.message));
     }, []);
 
-    // Handle category creation
+    useEffect(() => {
+        if (!selectedProductId) {
+            setReviews([]);
+            return;
+        }
+        fetchReviews(selectedProductId)
+            .then(setReviews)
+            .catch((e) => setError(e.message));
+    }, [selectedProductId]);
+
+    // Category handlers
     const handleAddCategory = async (name: string) => {
         try {
             await createCategory(name);
@@ -47,7 +70,8 @@ function App() {
         }
     };
 
-    const handleCreateProduct = async (product: Omit<Product, 'id'>) => {
+    // Product handlers
+    const handleCreateProduct = async (product: ProductWithoutId) => {
         try {
             const newProduct = await createProduct(product);
             setProducts([...products, newProduct]);
@@ -75,6 +99,30 @@ function App() {
             await deleteProduct(id);
             setProducts(products.filter((p) => p.id !== id));
             setError(null);
+            if (selectedProductId === id) setSelectedProductId(null);
+        } catch (e: any) {
+            setError(e.message);
+        }
+    };
+
+    // Unifikowana funkcja do zapisu (create/update)
+    const handleSaveProduct = async (product: Product | ProductWithoutId) => {
+        if ('id' in product) {
+            return handleUpdateProduct(product);
+        } else {
+            return handleCreateProduct(product);
+        }
+    };
+
+    // Review handlers
+    const handleAddReview = async (review: ReviewCreateDto) => {
+        try {
+            await addReview(review);
+            if (selectedProductId) {
+                const updatedReviews = await fetchReviews(selectedProductId);
+                setReviews(updatedReviews);
+            }
+            setError(null);
         } catch (e: any) {
             setError(e.message);
         }
@@ -85,28 +133,24 @@ function App() {
             <h1>Product Management</h1>
             {error && <div className="error">{error}</div>}
 
-            {/* --- Category Form --- */}
+            {/* Categories */}
             <h2>Categories</h2>
             <CategoryForm onAddCategory={handleAddCategory} />
 
-            {/* --- Product Form --- */}
-            {isAdding && (
+            {/* Product Form */}
+            {(isAdding || editingProduct) && (
                 <ProductForm
                     categories={categories}
-                    onSave={handleCreateProduct}
-                    onCancel={() => setIsAdding(false)}
+                    initialProduct={editingProduct ?? undefined}
+                    onSave={handleSaveProduct}
+                    onCancel={() => {
+                        setIsAdding(false);
+                        setEditingProduct(null);
+                    }}
                 />
             )}
 
-            {editingProduct && (
-                <ProductForm
-                    categories={categories}
-                    initialProduct={editingProduct}
-                    onSave={handleUpdateProduct}
-                    onCancel={() => setEditingProduct(null)}
-                />
-            )}
-
+            {/* Product List */}
             {!isAdding && !editingProduct && (
                 <>
                     <button onClick={() => setIsAdding(true)}>Add New Product</button>
@@ -114,8 +158,26 @@ function App() {
                         products={products}
                         onEdit={setEditingProduct}
                         onDelete={handleDeleteProduct}
+                        onSelectProduct={setSelectedProductId}
                     />
                 </>
+            )}
+
+            {/* Reviews section */}
+            {selectedProductId && (
+                <section className="reviews-section">
+                    <h2>Reviews for product ID: {selectedProductId}</h2>
+                    <div className="review-list">
+                        <ReviewList reviews={reviews} />
+                    </div>
+                    <div className="review-form">
+                        <ReviewForm
+                            productId={selectedProductId}
+                            customerId={currentCustomerId}
+                            onAddReview={handleAddReview}
+                        />
+                    </div>
+                </section>
             )}
         </div>
     );

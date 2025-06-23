@@ -1,4 +1,4 @@
-import type { category } from '../types/Category';
+import type { category } from '../types/category';
 
 const API_URL = 'https://localhost:58292/api/categories';
 

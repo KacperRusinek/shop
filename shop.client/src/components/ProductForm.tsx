@@ -2,6 +2,7 @@
 import * as React from 'react';
 import type { Product } from '../types/product';
 import type { category } from '../types/category';
+import './components.css';
 
 type Props = {
     onSave: (product: Product | Omit<Product, 'id'>) => void;
